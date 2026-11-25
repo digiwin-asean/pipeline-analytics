@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digiwin 商機分析</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main id="app"><div class="pa-msg">載入中… Đang tải…</div></main>
+<aside id="config" aria-label="Cấu hình">
+  <h2>Cấu hình 商機分析</h2>
+  <label for="cfg-opp">商機 Registry</label><select id="cfg-opp"></select>
+  <label for="cfg-ho">Handoff Registry</label><select id="cfg-ho"></select>
+  <label for="cfg-con">Contact Registry</label><select id="cfg-con"></select>
+  <p class="cfg-help">Ba bảng trong CRM App_Intake, do R1 / R3 / H6 ghi. Người xem cần quyền xem cả 3 bảng (toàn bộ dòng).</p>
+  <p id="cfg-status" class="cfg-status" role="status"></p>
+  <button id="cfg-save" type="button">確定 Lưu</button>
+</aside>
+<script type="module" src="./app.js?v=1"></script>
+</body>
+</html>

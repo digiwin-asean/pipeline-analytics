@@ -1,0 +1,61 @@
+/* Digiwin 商機分析 — sáng / tối theo theme dashboard (data-theme do main.js đặt) */
+:root { --pa-bg: #ffffff; --pa-panel: #f7f8fa; --pa-fg: #1f2329; --pa-muted: #646a73; --pa-line: #dee0e3; --pa-accent: #3370ff;
+  --pa-warn: #b26a00; --pa-bad: #d83931; --pa-warnbg: #fff4e5; --pa-radius: 8px; color-scheme: light; }
+:root[data-theme="dark"] { --pa-bg: #1a1a1a; --pa-panel: #232323; --pa-fg: #ebebeb; --pa-muted: #a6a6a6; --pa-line: #3a3a3a; --pa-accent: #4c88ff;
+  --pa-warn: #f0b429; --pa-bad: #f76964; --pa-warnbg: #3a2e14; color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--pa-bg); color: var(--pa-fg); font: 13px/1.5 -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Segoe UI", Roboto, sans-serif; }
+#app { padding: 16px; }
+#config { display: none; }
+body.is-config { display: grid; grid-template-columns: minmax(0, 1fr) 300px; height: 100vh; }
+body.is-config #app { overflow: auto; }
+body.is-config #config { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-left: 1px solid var(--pa-line); overflow: auto; background: var(--pa-panel); }
+#config h2 { font-size: 15px; margin: 0 0 4px; }
+#config label { font-weight: 600; font-size: 12px; }
+#config select { font: inherit; font-size: 12px; width: 100%; padding: 6px; border: 1px solid var(--pa-line); border-radius: 6px; background: var(--pa-bg); color: var(--pa-fg); }
+#config button { font: inherit; padding: 8px; border: 0; border-radius: 6px; background: var(--pa-accent); color: #fff; cursor: pointer; margin-top: auto; }
+.cfg-help, .cfg-status { font-size: 12px; color: var(--pa-muted); margin: 0; }
+.pa { display: flex; flex-direction: column; gap: 16px; max-width: 1280px; margin: 0 auto; }
+.pa-head { display: flex; flex-direction: column; gap: 10px; }
+.pa-titlebar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+.pa-title { font-size: 20px; font-weight: 600; margin: 0; }
+.pa-filters { display: flex; flex-wrap: wrap; gap: 12px; }
+.pa-muted { color: var(--pa-muted); font-size: 12px; margin: 0; }
+.pa-take { margin: 0; font-size: 14px; max-width: 90ch; }
+.pa-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.pa-chip { font: inherit; font-size: 12px; padding: 3px 12px; border-radius: 999px; border: 1px solid var(--pa-line); background: var(--pa-bg); color: var(--pa-fg); cursor: pointer; }
+.pa-chip[aria-pressed="true"] { background: var(--pa-fg); color: var(--pa-bg); border-color: var(--pa-fg); }
+.pa-select { font: inherit; font-size: 12px; padding: 4px 8px; border: 1px solid var(--pa-line); border-radius: 6px; background: var(--pa-bg); color: var(--pa-fg); max-width: 100%; }
+.pa-sec { display: flex; flex-direction: column; gap: 16px; }
+.pa-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.pa-kpi { background: var(--pa-panel); border: 1px solid var(--pa-line); border-radius: var(--pa-radius); padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pa-kpi.is-warn { border-color: var(--pa-warn); }
+.pa-kpi-label, .pa-kpi-note { font-size: 12px; color: var(--pa-muted); }
+.pa-kpi-value { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.pa-card { background: var(--pa-panel); border: 1px solid var(--pa-line); border-radius: var(--pa-radius); padding: 14px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.pa-card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.pa-h2 { font-size: 15px; font-weight: 600; margin: 0; }
+.pa-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+.pa-funnel { display: flex; flex-direction: column; gap: 6px; }
+.pa-frow { display: grid; grid-template-columns: 90px minmax(0, 1fr) 64px 64px; align-items: center; gap: 8px; }
+.pa-frow.is-leak .pa-flabel, .pa-frow.is-leak .pa-fpct { color: var(--pa-bad); font-weight: 600; }
+.pa-ftrack { height: 18px; background: var(--pa-bg); border-radius: 4px; overflow: hidden; }
+.pa-fbar { display: block; height: 100%; background: var(--pa-accent); border-radius: 4px; min-width: 2px; }
+.pa-fnum, .pa-fpct, .num { text-align: right; font-variant-numeric: tabular-nums; }
+.pa-fpct { color: var(--pa-muted); font-size: 12px; }
+.pa-tablewrap { overflow-x: auto; }
+.pa-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.pa-table th, .pa-table td { padding: 6px 8px; border-bottom: 1px solid var(--pa-line); text-align: left; vertical-align: middle; white-space: nowrap; }
+.pa-table td:nth-child(2) { white-space: normal; min-width: 140px; }
+.pa-table th { color: var(--pa-muted); font-weight: 600; }
+.pa-table th.num, .pa-table td.num { text-align: right; }
+.pa-table tr.is-worst td { background: var(--pa-warnbg); }
+.pa-table a { color: var(--pa-accent); text-decoration: none; }
+.pa-cellbar { display: inline-flex; align-items: center; gap: 6px; justify-content: flex-end; }
+.pa-bar { display: inline-block; width: 60px; height: 6px; background: var(--pa-bg); border-radius: 3px; overflow: hidden; }
+.pa-bar > span { display: block; height: 100%; background: var(--pa-accent); }
+.pa-bar.is-bad > span { background: var(--pa-bad); }
+.pa-bad { color: var(--pa-bad); font-weight: 600; }
+.pa-msg { padding: 24px; color: var(--pa-muted); }
+.pa-msg.is-err { color: var(--pa-bad); }
+@media (max-width: 600px) { #app { padding: 10px; } .pa-frow { grid-template-columns: 70px minmax(0, 1fr) 52px 52px; } }
